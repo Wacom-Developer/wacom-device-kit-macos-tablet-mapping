@@ -1,3 +1,0 @@
-[submodule "TabletMapping/Source/Wacom"]
-	path = TabletMapping/Source/Wacom
-	url = https://github.com/Wacom-Developer/wacom-device-kit-macos-api
