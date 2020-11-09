@@ -1,0 +1,17 @@
+///////////////////////////////////////////////////////////////////////////////
+//
+// DESCRIPTION
+// 	Tablet Events Only Cocoa.
+//
+// COPYRIGHT
+//    Copyright (c) 2010 - 2020 Wacom Co., Ltd.
+//    All rights reserved
+//
+///////////////////////////////////////////////////////////////////////////////
+
+#import <Cocoa/Cocoa.h>
+
+int main(int argc, char *argv[])
+{
+	return NSApplicationMain(argc,  (const char **) argv);
+}

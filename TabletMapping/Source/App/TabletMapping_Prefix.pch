@@ -1,0 +1,9 @@
+//
+// Prefix header for all source files of the 'Tablet Events Only Cocoa' target 
+// in the 'Tablet Events Only Cocoa' project 
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
+
