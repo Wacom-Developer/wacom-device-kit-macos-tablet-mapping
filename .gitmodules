@@ -1,0 +1,3 @@
+[submodule "Sample/Source/Wacom"]
+	path = Sample/Source/Wacom
+	url = https://github.com/Wacom-Developer/wacom-device-kit-macos-api
