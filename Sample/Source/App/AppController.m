@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 //
 // DESCRIPTION
 //		Logs mouse and tablet events.
@@ -12,35 +12,26 @@
 //		active whenever the application is frontmost.
 //
 // COPYRIGHT
-//    Copyright (c) 2010 - 2020 Wacom Co., Ltd.
+//    Copyright (c) 2010 - 2023 Wacom Co., Ltd.
 //    All rights reserved
 //
-///////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 #import "AppController.h"
 #import "WacomTabletDriver.h"
 
 @implementation AppController
 
-///////////////////////////////////////////////////////////////////////////////
+@synthesize lastUsedTablet;
 
-// Finish window setup.
-
-- (void) awakeFromNib
-{
-	// Allow us to log all mouse events.
-	[mWindow setAcceptsMouseMovedEvents:YES];
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // Initialize this object.
 
 - (id) init
 {
 	self = [super init];
 	
-	mLastUsedTablet   = 0;
+	lastUsedTablet   = 0;
 	mContextID        = 0; // 0 is an invalid context number.
 	mTabletOfContext  = 0;
 	mMovesCursor      = YES;
@@ -48,12 +39,9 @@
 	return self;
 }
 
-#pragma mark -
-#pragma mark ACTIONS
-#pragma mark -
+#pragma mark - ACTIONS -
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // Tells the Wacom driver to turn cursor movement on or off.
 
 - (IBAction) toggleMovesCursor:(id)sender_I
@@ -74,8 +62,7 @@
 	mMovesCursor = newMovesCursor;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // Keeps the mouse cursor inside the application window.
 
 - (IBAction) toggleConstrainToWindow:(id)sender_I
@@ -95,8 +82,7 @@
 	}
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // The tablet portion is set to the left half of the tablet.
 
 - (IBAction) toggleConstrainToLeftHalfOfTablet:(id)sender_I
@@ -138,8 +124,7 @@
 	}
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // Tells the Wacom driver to partion the tablet into two separate
 //	contexts, each one of which will represent the full screen.
 
@@ -158,7 +143,7 @@
 		NSAppleEventDescriptor  *tabletAreaDesc   = nil;
 		
 		// Two active areas will require two contexts instead of the usual one.
-		mContext2ID    = [WacomTabletDriver createContextForTablet:mLastUsedTablet type:pContextTypeDefault];
+		mContext2ID    = [WacomTabletDriver createContextForTablet:(UInt32)lastUsedTablet type:pContextTypeDefault];
 		routingDesc    = [WacomTabletDriver routingTableForContext:mContextID];
 		routing2Desc   = [WacomTabletDriver routingTableForContext:mContext2ID];
 		
@@ -207,8 +192,7 @@
 
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // The values returned for -[NSEvent absoluteX] and -[NSEvent
 //	absoluteY] aren't what they claim to be. This method fixes that.
 
@@ -258,49 +242,9 @@
 	// The values fall within this range as long as the context persists.
 }
 
-#pragma mark -
-#pragma mark DELEGATES
-#pragma mark -
+#pragma mark - DELEGATES -
 
-///////////////////////////////////////////////////////////////////////////////
-
-// Register for events.
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification_I
-{
-	NSEventMask observedTypes =		NSEventMaskTabletPoint
-	|	NSEventMaskTabletProximity
-											
-	|	NSEventMaskMouseMoved
-	|	NSEventMaskLeftMouseDragged
-	|	NSEventMaskRightMouseDragged
-	|	NSEventMaskOtherMouseDragged
-											
-	|	NSEventMaskLeftMouseDown
-	|	NSEventMaskRightMouseDown
-	|	NSEventMaskOtherMouseDown
-											
-	|	NSEventMaskLeftMouseUp
-	|	NSEventMaskRightMouseUp
-	|	NSEventMaskOtherMouseUp;
-											
-	// We will watch and log all these events as they come to us.
-	//
-	//	If you were interested in events in the background, you can use
-	//	+addGlobalMonitorForEventsMatchingMask.
-	//
-	//	You may also use Quartz Event Taps.
-	//
-	[NSEvent addLocalMonitorForEventsMatchingMask:observedTypes
-													  handler:^(NSEvent* theEvent)
-													  {
-														  [self setValuesFromEvent:theEvent];
-														  return theEvent;
-													  }];
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // Contexts should be destroyed, otherwise they will live on in the
 //	driver unnecessarily.
 
@@ -317,8 +261,7 @@
 	}
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // Keep the checkmarks up-to-date on the Fun menu items.
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem_I
@@ -349,8 +292,7 @@
 	return YES;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // When constraining the cursor to the window, we need to update the
 //	portion-of-screen as the window moves. The Wacom driver doesn't
 //	track a window, it just maps a coordinate area on the desktop. So
@@ -365,12 +307,9 @@
 	}
 }
 
-#pragma mark -
-#pragma mark UTILITIES
-#pragma mark -
+#pragma mark - UTILITIES -
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // Returns the union of all screen rectangles.
 
 - (NSRect) desktopRect
@@ -389,15 +328,14 @@
 	return desktop;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // Updates the Wacom driver context to be associated with the
 //	current tablet, discarding the old context if necessary.
 
 - (void) makeContextForCurrentTablet
 {
 	// If we changed tablets since creating the context, we need to start over.
-	if (mLastUsedTablet != mTabletOfContext)
+	if (lastUsedTablet != mTabletOfContext)
 	{
 		[WacomTabletDriver destroyContext:mContextID];
 		mContextID = 0;
@@ -409,13 +347,12 @@
 	// If no context, create one.
 	if (mContextID == 0)
 	{
-		mContextID        = [WacomTabletDriver createContextForTablet:mLastUsedTablet type:pContextTypeDefault];
-		mTabletOfContext  = mLastUsedTablet;
+		mContextID        = [WacomTabletDriver createContextForTablet:(UInt32)lastUsedTablet type:pContextTypeDefault];
+		mTabletOfContext  = (UInt32)lastUsedTablet;
 	}
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // Returns the display name of the pen with the given serial number.
 // This method will ONLY return an answer when the pen was the last
 //	used transducer of its type. Consequently, you should ONLY call
@@ -423,7 +360,7 @@
 
 - (NSString *) nameOfPen:(NSUInteger)serialNumber_I
 {
-	UInt32                  transducerCount   = [WacomTabletDriver transducerCountForTablet:mLastUsedTablet];
+	UInt32                  transducerCount   = [WacomTabletDriver transducerCountForTablet:(UInt32)lastUsedTablet];
 	NSAppleEventDescriptor  *routingTable     = nil;
 	NSAppleEventDescriptor	*nameDesc			= nil;
 	NSAppleEventDescriptor	*serialNumberDesc	= nil;
@@ -436,7 +373,7 @@
 		// Retrieve pen info. 
 		// Note:	Transducer data is not available through a context. We access the 
 		//			data directly from the tablet. 
-		routingTable      = [WacomTabletDriver routingTableForTablet:mLastUsedTablet transducer:counter];
+		routingTable      = [WacomTabletDriver routingTableForTablet:(UInt32)lastUsedTablet transducer:counter];
 		nameDesc          = [WacomTabletDriver dataForAttribute:pName ofType:typeUTF8Text routingTable:routingTable];
 		serialNumberDesc  = [WacomTabletDriver dataForAttribute:pSerialNumber ofType:typeUInt32 routingTable:routingTable];
 		
@@ -449,8 +386,7 @@
 	return name;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
+// /////////////////////////////////////////////////////////////////////////////
 // Sets the portion of the desktop the current tablet context maps to.
 
 - (void) setPortionOfScreen:(NSRect)screenPortion_I
@@ -472,137 +408,6 @@
 									ofType:typeQDRectangle
 							forAttribute:pContextMapScreenArea
 							routingTable:routingDesc];
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-// Updates the UI with the parameters from the event.
-
-- (void) setValuesFromEvent:(NSEvent *)theEvent_I
-{
-	NSEventType eventType            = [theEvent_I type];
-	BOOL        isMouseEvent         = NO;
-	BOOL        isTabletPointEvent   = NO;
-	NSUInteger  modifierFlags        = ([theEvent_I modifierFlags] & NSEventModifierFlagDeviceIndependentFlagsMask);
-	NSString    *modifierString      = [NSString stringWithFormat:@"%lX", (unsigned long)modifierFlags];
-	NSString    *penName             = nil;
-	
-	// Establish which events we may safely query for subtype.
-	if (	eventType == NSEventTypeMouseMoved
-		 ||	eventType == NSEventTypeLeftMouseDragged
-		 ||	eventType == NSEventTypeRightMouseDragged
-		 ||	eventType == NSEventTypeOtherMouseDragged
-		
-		 ||	eventType == NSEventTypeLeftMouseDown
-		 ||	eventType == NSEventTypeRightMouseDown
-		 ||	eventType == NSEventTypeOtherMouseDown
-		
-		 ||	eventType == NSEventTypeLeftMouseUp
-		 ||	eventType == NSEventTypeRightMouseUp
-		 ||	eventType == NSEventTypeOtherMouseUp )
-	{
-		isMouseEvent = YES;
-	}
-
-	// Find tablet point events (both pure and embedded).
-	if (eventType == NSEventTypeTabletPoint ||
-		 (isMouseEvent == YES &&	[theEvent_I subtype] == NSEventSubtypeTabletPoint))
-	{
-		isTabletPointEvent = YES;
-	}
-	
-	if (eventType == NSEventTypeTabletProximity)
-	{
-		mLastUsedTablet   = (UInt32)[theEvent_I systemTabletID];
-		penName           = [self nameOfPen:[theEvent_I pointingDeviceSerialNumber]];
-	}
-	
-	//---------- Set UI ---------------------------------------------------------
-	
-	// Mouse move.
-	if (eventType == NSEventTypeMouseMoved)
-	{
-		[mMouseMoveLocationXField		setFloatValue:[theEvent_I locationInWindow].x];
-		[mMouseMoveLocationYField		setFloatValue:[theEvent_I locationInWindow].y];
-		[mMouseMoveDeltaXField			setFloatValue:[theEvent_I deltaX]];
-		[mMouseMoveDeltaYField			setFloatValue:[theEvent_I deltaY]];
-		[mMouseMoveModifiersField		setStringValue:modifierString];
-		[mMouseMoveIsTabletEventField	setStringValue:(isTabletPointEvent ? @"Yes" : @"No")];
-		
-	}
-	
-	// Mouse down.
-	if (	eventType == NSEventTypeLeftMouseDown
-		 ||	eventType == NSEventTypeRightMouseDown
-		 ||	eventType == NSEventTypeOtherMouseDown )
-	{
-		[mMouseDownLocationXField		setFloatValue:[theEvent_I locationInWindow].x];
-		[mMouseDownLocationYField		setFloatValue:[theEvent_I locationInWindow].y];
-		[mMouseDownModifiersField		setStringValue:modifierString];
-		[mMouseDownIsTabletEventField	setStringValue:(isTabletPointEvent ? @"Yes" : @"No")];
-		
-	}
-	
-	// Mouse Dragged.
-	if (	eventType == NSEventTypeLeftMouseDragged
-		 ||	eventType == NSEventTypeRightMouseDragged
-		 ||	eventType == NSEventTypeOtherMouseDragged )
-	{
-		[mMouseDragLocationXField		setFloatValue:[theEvent_I locationInWindow].x];
-		[mMouseDragLocationYField		setFloatValue:[theEvent_I locationInWindow].y];
-		[mMouseDragDeltaXField			setFloatValue:[theEvent_I deltaX]];
-		[mMouseDragDeltaYField			setFloatValue:[theEvent_I deltaY]];
-		[mMouseDragModifiersField		setStringValue:modifierString];
-		[mMouseDragIsTabletEventField	setStringValue:(isTabletPointEvent ? @"Yes" : @"No")];
-		
-		[mMouseDragIsTabletEventField setNeedsDisplay:YES];
-		
-	}
-	
-	// Mouse up.
-	if (	eventType == NSEventTypeLeftMouseUp
-		 ||	eventType == NSEventTypeRightMouseUp
-		 ||	eventType == NSEventTypeOtherMouseUp )
-	{
-		[mMouseUpLocationXField			setFloatValue:[theEvent_I locationInWindow].x];
-		[mMouseUpLocationYField			setFloatValue:[theEvent_I locationInWindow].y];
-		[mMouseUpModifiersField			setStringValue:modifierString];
-		[mMouseUpIsTabletEventField	setStringValue:(isTabletPointEvent ? @"Yes" : @"No")];
-		
-	}
-	
-	// Set field valid for Tablet Point events.
-	if (isTabletPointEvent == YES)
-	{
-		[mAbsoluteXField					setIntValue:(int)[theEvent_I absoluteX]];
-		[mAbsoluteYField					setIntValue:(int)[theEvent_I absoluteY]];
-		[mAbsoluteZField					setIntValue:(int)[theEvent_I absoluteZ]];
-		
-		[mPressureField					setFloatValue:[theEvent_I pressure]];
-		[mTangentialPressureField		setFloatValue:[theEvent_I tangentialPressure]];
-		
-		[mTiltXField						setFloatValue:[theEvent_I tilt].x];
-		[mTiltYField						setFloatValue:[theEvent_I tilt].y];
-		[mRotationField					setFloatValue:[theEvent_I rotation]];
-		
-		[mDeviceIDField					setIntValue:(int)[theEvent_I deviceID]];
-	}
-	
-	// Set Fields valid for point or proximity events.
-	if (	isTabletPointEvent == YES
-		 ||	eventType == NSEventTypeTabletProximity)
-	{
-		[mDeviceIDField					setIntValue:(int)[theEvent_I deviceID]];
-	}
-	
-	if (eventType == NSEventTypeTabletProximity)
-	{
-		if (penName)
-		{
-			[mTransducerNameField			setStringValue:penName];
-		}
-		[mTransducerSerialNumberField	setStringValue:[NSString stringWithFormat:@"0x%lX", (unsigned long)[theEvent_I pointingDeviceSerialNumber]]];
 	}
 }
 

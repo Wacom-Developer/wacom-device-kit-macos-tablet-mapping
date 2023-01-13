@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03B1635E249153680049096D /* NSAppleEventDescriptorHelperCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B1635A249153680049096D /* NSAppleEventDescriptorHelperCategory.m */; };
-		03B1635F249153680049096D /* WacomTabletDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B1635D249153680049096D /* WacomTabletDriver.m */; };
 		0BA347C510FD0A81002D46D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA347BD10FD0A81002D46D1 /* main.m */; };
 		0BA347C610FD0A81002D46D1 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA347C010FD0A81002D46D1 /* AppController.m */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
@@ -17,14 +15,12 @@
 		56C1407D2487233300C98DD2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C1407C2487233300C98DD2 /* CoreData.framework */; };
 		56C1407F2487234100C98DD2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C1407E2487234100C98DD2 /* Foundation.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		D181C87A2966106F008D11D8 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D181C8792966106F008D11D8 /* WindowController.m */; };
+		D1C717F4296F57BE00C273F9 /* NSAppleEventDescriptorHelperCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C717EF296F57BD00C273F9 /* NSAppleEventDescriptorHelperCategory.m */; };
+		D1C717F5296F57BE00C273F9 /* WacomTabletDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C717F2296F57BD00C273F9 /* WacomTabletDriver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03B16359249153680049096D /* NSAppleEventDescriptorHelperCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSAppleEventDescriptorHelperCategory.h; sourceTree = "<group>"; };
-		03B1635A249153680049096D /* NSAppleEventDescriptorHelperCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSAppleEventDescriptorHelperCategory.m; sourceTree = "<group>"; };
-		03B1635B249153680049096D /* TabletAEDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletAEDictionary.h; sourceTree = "<group>"; };
-		03B1635C249153680049096D /* WacomTabletDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WacomTabletDriver.h; sourceTree = "<group>"; };
-		03B1635D249153680049096D /* WacomTabletDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WacomTabletDriver.m; sourceTree = "<group>"; };
 		0BA347BD10FD0A81002D46D1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0BA347BE10FD0A81002D46D1 /* TabletMapping_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletMapping_Prefix.pch; sourceTree = "<group>"; };
 		0BA347BF10FD0A81002D46D1 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
@@ -36,6 +32,13 @@
 		56C140802488554000C98DD2 /* Tablet Mapping.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tablet Mapping.entitlements"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* TabletMapping-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TabletMapping-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Tablet Mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tablet Mapping.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D181C8782966106F008D11D8 /* WindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
+		D181C8792966106F008D11D8 /* WindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
+		D1C717EF296F57BD00C273F9 /* NSAppleEventDescriptorHelperCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSAppleEventDescriptorHelperCategory.m; sourceTree = "<group>"; };
+		D1C717F0296F57BD00C273F9 /* TabletAEDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletAEDictionary.h; sourceTree = "<group>"; };
+		D1C717F1296F57BD00C273F9 /* NSAppleEventDescriptorHelperCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSAppleEventDescriptorHelperCategory.h; sourceTree = "<group>"; };
+		D1C717F2296F57BD00C273F9 /* WacomTabletDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WacomTabletDriver.m; sourceTree = "<group>"; };
+		D1C717F3296F57BD00C273F9 /* WacomTabletDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WacomTabletDriver.h; sourceTree = "<group>"; };
 		DB2CEDB823A3513B00F519DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DBF4ED1723A3512600F0FB0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,15 +61,14 @@
 		03B16358249153680049096D /* Wacom */ = {
 			isa = PBXGroup;
 			children = (
-				03B16359249153680049096D /* NSAppleEventDescriptorHelperCategory.h */,
-				03B1635A249153680049096D /* NSAppleEventDescriptorHelperCategory.m */,
-				03B1635B249153680049096D /* TabletAEDictionary.h */,
-				03B1635C249153680049096D /* WacomTabletDriver.h */,
-				03B1635D249153680049096D /* WacomTabletDriver.m */,
+				D1C717F1296F57BD00C273F9 /* NSAppleEventDescriptorHelperCategory.h */,
+				D1C717EF296F57BD00C273F9 /* NSAppleEventDescriptorHelperCategory.m */,
+				D1C717F0296F57BD00C273F9 /* TabletAEDictionary.h */,
+				D1C717F3296F57BD00C273F9 /* WacomTabletDriver.h */,
+				D1C717F2296F57BD00C273F9 /* WacomTabletDriver.m */,
 			);
-			name = Wacom;
-			path = "/Volumes/development/git_repo/wacom-device-kit-macos-tablet-mapping/TabletMapping/Source/Wacom";
-			sourceTree = "<absolute>";
+			path = Wacom;
+			sourceTree = "<group>";
 		};
 		0BA347BB10FD0A81002D46D1 /* Source */ = {
 			isa = PBXGroup;
@@ -84,6 +86,8 @@
 				0BA347BE10FD0A81002D46D1 /* TabletMapping_Prefix.pch */,
 				0BA347BF10FD0A81002D46D1 /* AppController.h */,
 				0BA347C010FD0A81002D46D1 /* AppController.m */,
+				D181C8782966106F008D11D8 /* WindowController.h */,
+				D181C8792966106F008D11D8 /* WindowController.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -204,10 +208,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03B1635E249153680049096D /* NSAppleEventDescriptorHelperCategory.m in Sources */,
-				03B1635F249153680049096D /* WacomTabletDriver.m in Sources */,
+				D181C87A2966106F008D11D8 /* WindowController.m in Sources */,
 				0BA347C510FD0A81002D46D1 /* main.m in Sources */,
 				0BA347C610FD0A81002D46D1 /* AppController.m in Sources */,
+				D1C717F4296F57BE00C273F9 /* NSAppleEventDescriptorHelperCategory.m in Sources */,
+				D1C717F5296F57BE00C273F9 /* WacomTabletDriver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +244,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Tablet Mapping.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -261,7 +268,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Tablet Mapping.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
